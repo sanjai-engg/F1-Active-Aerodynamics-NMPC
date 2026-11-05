@@ -36,8 +36,6 @@ This repository contains multiple development stages, not one single interchange
 ├── 130R_DoubleApex_Trajectory.mat
 ├── docs/
 │   └── MODEL_AND_REPRODUCIBILITY_NOTES.md
-├── report/
-│   └── Vehicle_Dynamics_Project.pdf
 └── src/
     ├── aerodynamics/
     │   └── Airfoil_Setup.m

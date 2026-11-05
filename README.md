@@ -33,6 +33,8 @@ This repository contains multiple development stages, not one single interchange
 .
 ├── README.md
 ├── 130R_DoubleApex_Trajectory.mat
+├── Eppler_E423.txt
+├── SeligS1223.txt
 ├── docs/
 │   └── MODEL_AND_REPRODUCIBILITY_NOTES.md
 └── src/
@@ -50,6 +52,7 @@ This repository contains multiple development stages, not one single interchange
     │   ├── Run_Day2_UnitTest.m
     │   └── setup_nmpc.m
     ├── supplementary_analysis/
+    │   ├── Vehicle_Cornering2.slx
     │   ├── cornering.m
     │   └── pacejka.m
     └── track_generation/
@@ -62,11 +65,11 @@ From the repository root, first run `addpath(genpath(pwd))`, then run `src/casad
 
 The current source filename says `v5`, while the script header and comments describe **v7**. The filename is preserved from the upload to avoid silently renaming the submitted source.
 
-### Important airfoil-data note
+### Airfoil polar data
 
-The uploaded package does **not** contain `SeligS1223.txt` or `Eppler_E423.txt`. The main CasADi script creates simplified analytic placeholder tables with those filenames when the files are missing. Those generated tables are **not verified measured airfoil polar data**. Results obtained with the fallback should not be presented as validated results based on the Selig S1223 and Eppler E423 airfoil datasets. To use measured polars, supply the actual data files in the working directory and verify their columns, units, and angle convention.
+The repository includes the supplied `SeligS1223.txt` and `Eppler_E423.txt` numeric polar tables at the repository root. Both files are headerless and contain seven numeric columns. The main CasADi script and `Airfoil_Setup.m` use the first three columns: angle of attack, lift coefficient (`C_L`), and drag coefficient (`C_D`). The remaining columns are retained from the supplied data but are not used by these scripts.
 
-`src/aerodynamics/Airfoil_Setup.m` also expects those two input files and cannot regenerate coefficients without them.
+Run the scripts with the repository root as MATLAB's current working directory so the relative filenames resolve. With both files present there, the main CasADi script loads the supplied tables instead of generating its simplified fallback tables. The source data have been included as supplied; their provenance and experimental conditions should be checked before treating them as independently validated airfoil measurements.
 
 ## Other MATLAB implementations
 
@@ -81,7 +84,7 @@ The uploaded package does **not** contain `SeligS1223.txt` or `Eppler_E423.txt`.
 - MATLAB.
 - **CasADi MATLAB interface** and **IPOPT** for the principal CasADi NMPC script.
 - MATLAB **Model Predictive Control Toolbox** for the `nlmpc` / `nlmpcmove` prototype scripts.
-- The `Vehicle_Cornering2.slx` Simulink model is additionally required only for `cornering.m`; it is not included here.
+- The included `src/supplementary_analysis/Vehicle_Cornering2.slx` model is required by `cornering.m`.
 
 For scripts that load the track MAT file by its basename, keep the MATLAB current working directory at the repository root. Add the repository tree to the MATLAB path with `addpath(genpath(pwd))` before running scripts in subfolders.
 

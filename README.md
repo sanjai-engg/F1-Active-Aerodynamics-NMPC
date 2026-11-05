@@ -2,16 +2,6 @@
 
 **Topic:** Nonlinear Model Predictive Control (NMPC) for a simplified double-apex track inspired by the 130R corner at Suzuka.
 
-## Project team
-
-**Team XTorque**
-
-- Ashish Sam
-- Frazel Fernandes
-- Joel J Nellikkunnel
-- Mukhil M
-- Sanjai V
-
 This repository documents the team's ME5670 course project. The original course presentation PDF was intentionally excluded from this repository. 
 ## Project overview
 
@@ -93,6 +83,16 @@ No MATLAB/Octave runtime was available during preparation of this repository pac
 ## Scope and interpretation
 
 This is a simulation and coursework implementation, not a validated F1 vehicle model or a real-time controller deployed on a physical vehicle. Parameters and simplified aerodynamic/tyre relations are model assumptions. Interpret the project plots and any results reported in the original course presentation within those limitations.
+
+## Project team
+
+**Team XTorque**
+
+- Ashish Sam
+- Frazel Fernandes
+- Joel J Nellikkunnel
+- Mukhil M
+- Sanjai V
 
 
 ## Acknowledgements

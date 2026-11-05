@@ -19,7 +19,7 @@ Do not describe these as one common controller implementation. The report's NMPC
 
 ## 3. Airfoil polar inputs
 
-The raw `SeligS1223.txt` and `Eppler_E423.txt` datasets are not in the upload. The CasADi script silently synthesizes simplified placeholder tables if either file is missing. Such a run is useful for software prototyping, but it is not a run using validated airfoil polar measurements. `Airfoil_Setup.m` requires the missing files.
+The supplied `SeligS1223.txt` and `Eppler_E423.txt` datasets are included at the repository root. They are headerless seven-column numeric tables; the supplied scripts use columns 1–3 as angle of attack, lift coefficient, and drag coefficient. `Airfoil_Setup.m` has been changed to read zero header lines so it does not discard valid data rows. The CasADi script still generates simplified placeholder tables if either expected filename is absent from the MATLAB current working directory. The supplied data have not been independently checked against an external source or test conditions.
 
 ## 4. Differences in the two 7-DOF model implementations
 
@@ -29,9 +29,7 @@ The `VehicleDynamics7DOF.m` file does not currently calculate dynamic longitudin
 
 ## 5. Missing supporting assets
 
-- Raw airfoil polar files: `SeligS1223.txt`, `Eppler_E423.txt`.
-- Simulink model: `Vehicle_Cornering2.slx` (required by `cornering.m`).
-- Unreal Engine / Simulink visualization assets and model files mentioned in the presentation (pages 12–14).
+- Unreal Engine / Simulink visualization assets and model files mentioned in the presentation (pages 12–14) are not included. The `Vehicle_Cornering2.slx` model needed by `cornering.m` is now included under `src/supplementary_analysis/`.
 
 ## 6. Results and validation
 

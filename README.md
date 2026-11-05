@@ -1,6 +1,5 @@
 # Optimal Autonomous Control of an F1 Car with Active Aerodynamics
 
-**Course project:** ME5670 — Vehicle Dynamics and Modelling  
 **Topic:** Nonlinear Model Predictive Control (NMPC) for a simplified double-apex track inspired by the 130R corner at Suzuka.
 
 ## Project team

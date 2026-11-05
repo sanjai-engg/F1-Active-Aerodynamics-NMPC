@@ -3,7 +3,17 @@
 **Course project:** ME5670 — Vehicle Dynamics and Modelling  
 **Topic:** Nonlinear Model Predictive Control (NMPC) for a simplified double-apex track inspired by the 130R corner at Suzuka.
 
-This is a team course project. The supplied 15-page project presentation is retained in [`report/Vehicle_Dynamics_Project.pdf`](report/Vehicle_Dynamics_Project.pdf); its cover identifies the contributors.
+## Project team
+
+**Team XTorque**
+
+- Ashish Sam
+- Frazel Fernandes
+- Joel J Nellikkunnel
+- Mukhil M
+- Sanjai V
+
+This repository documents the team's ME5670 course project. The original project presentation/report PDF is not included in this repository.
 
 ## Project overview
 
@@ -83,4 +93,9 @@ No MATLAB/Octave runtime was available during preparation of this repository pac
 
 ## Scope and interpretation
 
-This is a simulation and coursework implementation, not a validated F1 vehicle model or a real-time controller deployed on a physical vehicle. Parameters and simplified aerodynamic/tyre relations are model assumptions. Interpret the project plots and any results in the presentation within those limitations.
+This is a simulation and coursework implementation, not a validated F1 vehicle model or a real-time controller deployed on a physical vehicle. Parameters and simplified aerodynamic/tyre relations are model assumptions. Interpret the project plots and any results reported in the original course presentation within those limitations.
+
+
+## Acknowledgements
+
+Generative AI assistance (ChatGPT) was used during repository preparation for code-review discussions, debugging suggestions, repository-structure organisation, and documentation drafting. AI-generated suggestions were used as assistance, not as independent verification. The project team remains responsible for reviewing the source code, validating simulations, and checking the technical content and results presented in this repository.

@@ -29,7 +29,7 @@ The `VehicleDynamics7DOF.m` file does not currently calculate dynamic longitudin
 
 ## 5. Missing supporting assets
 
-- Unreal Engine / Simulink visualization assets and model files mentioned in the presentation (pages 12–14) are not included. The `Vehicle_Cornering2.slx` model needed by `cornering.m` is now included under `src/supplementary_analysis/`.
+- The `Vehicle_Cornering2.slx` Simulink model required by `cornering.m` has been supplied separately but is not yet committed to this repository. Unreal Engine / Simulink visualization assets and model files mentioned in the presentation (pages 12–14) are not included.
 
 ## 6. Results and validation
 

@@ -42,7 +42,6 @@ This repository contains multiple development stages, not one single interchange
     │   ├── Run_Day2_UnitTest.m
     │   └── setup_nmpc.m
     ├── supplementary_analysis/
-    │   ├── Vehicle_Cornering2.slx
     │   ├── cornering.m
     │   └── pacejka.m
     └── track_generation/
@@ -67,14 +66,14 @@ Run the scripts with the repository root as MATLAB's current working directory s
 - `src/matlab_nmpc_prototype/setup_nmpc.m` is an earlier setup script. Its dimensions (5 states / 3 outputs) do not match the currently uploaded state/output functions (6 states / 4 outputs); it is retained as a development artifact, not advertised as a ready-to-run entry point.
 - `src/matlab_7dof_model/Run_Day3_RealPlant.m` uses MATLAB's `nlmpc` workflow with `VehicleDynamics7DOF.m` and the 130R MAT data. `TireSlipConstraints.m` is included as a candidate custom constraint function, but the supplied Day 3 runner does not register it as the controller's custom inequality constraint.
 - `src/track_generation/Track_layout.m` regenerates the double-apex track table. The supplied MAT file is kept as a separate input data file.
-- `src/supplementary_analysis/cornering.m` calls a Simulink model named `Vehicle_Cornering2`; that `.slx` model was not included in the supplied files. `pacejka.m` contains supplementary coursework calculations/plots rather than the main controller.
+- `src/supplementary_analysis/cornering.m` calls a Simulink model named `Vehicle_Cornering2`; the model file has been supplied separately but is not yet committed to this repository. `pacejka.m` contains supplementary coursework calculations/plots rather than the main controller.
 
 ## Dependencies
 
 - MATLAB.
 - **CasADi MATLAB interface** and **IPOPT** for the principal CasADi NMPC script.
 - MATLAB **Model Predictive Control Toolbox** for the `nlmpc` / `nlmpcmove` prototype scripts.
-- The included `src/supplementary_analysis/Vehicle_Cornering2.slx` model is required by `cornering.m`.
+- The `Vehicle_Cornering2.slx` Simulink model is required by `cornering.m`; it has not yet been uploaded to this repository.
 
 For scripts that load the track MAT file by its basename, keep the MATLAB current working directory at the repository root. Add the repository tree to the MATLAB path with `addpath(genpath(pwd))` before running scripts in subfolders.
 

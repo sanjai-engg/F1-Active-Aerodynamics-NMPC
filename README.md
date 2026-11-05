@@ -1,0 +1,86 @@
+# Optimal Autonomous Control of an F1 Car with Active Aerodynamics
+
+**Course project:** ME5670 — Vehicle Dynamics and Modelling  
+**Topic:** Nonlinear Model Predictive Control (NMPC) for a simplified double-apex track inspired by the 130R corner at Suzuka.
+
+This is a team course project. The supplied 15-page project presentation is retained in [`report/Vehicle_Dynamics_Project.pdf`](report/Vehicle_Dynamics_Project.pdf); its cover identifies the contributors.
+
+## Project overview
+
+The project explores closed-loop vehicle control with steering, longitudinal wheel torque, and continuously variable front/rear wing angles of attack as control inputs. The principal implementation is a MATLAB script using **CasADi** and **IPOPT**. Its local vehicle model uses a 10-state Frenet-frame representation: progress along the track, lateral and heading errors, longitudinal/lateral velocity, yaw rate, and four wheel angular speeds.
+
+The main implementation includes:
+
+- **NMPC** with a finite prediction horizon, a nonlinear programming solver, warm-started trajectories, and actuator slew-rate penalties/limits.
+- A **7-DOF double-track vehicle model** with four wheel-speed states, combined-slip tyre forces, and wheel-torque actuation.
+- **Active aerodynamics**, with front and rear wing angle-of-attack commands contributing to downforce and aerodynamic drag.
+- **Frenet-frame path tracking** using track arc length, lateral error, heading error, and a sampled curvature preview.
+- A generated **double-apex reference track** and MATLAB plots for speed, steering, wing commands, lateral deviation, torque, and trajectory.
+
+This repository contains multiple development stages, not one single interchangeable implementation. See the model notes below before choosing an entry point.
+
+## Repository structure
+
+```text
+.
+├── README.md
+├── 130R_DoubleApex_Trajectory.mat
+├── docs/
+│   └── MODEL_AND_REPRODUCIBILITY_NOTES.md
+├── report/
+│   └── Vehicle_Dynamics_Project.pdf
+└── src/
+    ├── aerodynamics/
+    │   └── Airfoil_Setup.m
+    ├── casadi_nmpc/
+    │   └── NEW_F1_nmpc_activeAero_v5.m
+    ├── matlab_7dof_model/
+    │   ├── Run_Day3_RealPlant.m
+    │   ├── TireSlipConstraints.m
+    │   └── VehicleDynamics7DOF.m
+    ├── matlab_nmpc_prototype/
+    │   ├── NMPC_OutputFcn.m
+    │   ├── NMPC_StateFcn.m
+    │   ├── Run_Day2_UnitTest.m
+    │   └── setup_nmpc.m
+    ├── supplementary_analysis/
+    │   ├── cornering.m
+    │   └── pacejka.m
+    └── track_generation/
+        └── Track_layout.m
+```
+
+## Main entry point: CasADi/IPOPT NMPC
+
+From the repository root, first run `addpath(genpath(pwd))`, then run `src/casadi_nmpc/NEW_F1_nmpc_activeAero_v5.m` in MATLAB after configuring the MATLAB interface for **CasADi** and ensuring **IPOPT** is available through that installation. The script uses the track data in `130R_DoubleApex_Trajectory.mat` when that file is available; otherwise it creates a fallback curvature profile.
+
+The current source filename says `v5`, while the script header and comments describe **v7**. The filename is preserved from the upload to avoid silently renaming the submitted source.
+
+### Important airfoil-data note
+
+The uploaded package does **not** contain `SeligS1223.txt` or `Eppler_E423.txt`. The main CasADi script creates simplified analytic placeholder tables with those filenames when the files are missing. Those generated tables are **not verified measured airfoil polar data**. Results obtained with the fallback should not be presented as validated results based on the Selig S1223 and Eppler E423 airfoil datasets. To use measured polars, supply the actual data files in the working directory and verify their columns, units, and angle convention.
+
+`src/aerodynamics/Airfoil_Setup.m` also expects those two input files and cannot regenerate coefficients without them.
+
+## Other MATLAB implementations
+
+- `src/matlab_nmpc_prototype/Run_Day2_UnitTest.m` is an earlier six-state, three-input MATLAB NMPC prototype using `NMPC_StateFcn.m` and `NMPC_OutputFcn.m`.
+- `src/matlab_nmpc_prototype/setup_nmpc.m` is an earlier setup script. Its dimensions (5 states / 3 outputs) do not match the currently uploaded state/output functions (6 states / 4 outputs); it is retained as a development artifact, not advertised as a ready-to-run entry point.
+- `src/matlab_7dof_model/Run_Day3_RealPlant.m` uses MATLAB's `nlmpc` workflow with `VehicleDynamics7DOF.m` and the 130R MAT data. `TireSlipConstraints.m` is included as a candidate custom constraint function, but the supplied Day 3 runner does not register it as the controller's custom inequality constraint.
+- `src/track_generation/Track_layout.m` regenerates the double-apex track table. The supplied MAT file is kept as a separate input data file.
+- `src/supplementary_analysis/cornering.m` calls a Simulink model named `Vehicle_Cornering2`; that `.slx` model was not included in the supplied files. `pacejka.m` contains supplementary coursework calculations/plots rather than the main controller.
+
+## Dependencies
+
+- MATLAB.
+- **CasADi MATLAB interface** and **IPOPT** for the principal CasADi NMPC script.
+- MATLAB **Model Predictive Control Toolbox** for the `nlmpc` / `nlmpcmove` prototype scripts.
+- The `Vehicle_Cornering2.slx` Simulink model is additionally required only for `cornering.m`; it is not included here.
+
+For scripts that load the track MAT file by its basename, keep the MATLAB current working directory at the repository root. Add the repository tree to the MATLAB path with `addpath(genpath(pwd))` before running scripts in subfolders.
+
+No MATLAB/Octave runtime was available during preparation of this repository package, so the uploaded scripts have been organised and statically inspected but **have not been executed end-to-end in this environment**.
+
+## Scope and interpretation
+
+This is a simulation and coursework implementation, not a validated F1 vehicle model or a real-time controller deployed on a physical vehicle. Parameters and simplified aerodynamic/tyre relations are model assumptions. Interpret the project plots and any results in the presentation within those limitations.

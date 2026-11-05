@@ -13,7 +13,7 @@
 - Mukhil M
 - Sanjai V
 
-This repository documents the team's ME5670 course project. 
+This repository documents the team's ME5670 course project. The original course presentation PDF was intentionally excluded from this repository. 
 ## Project overview
 
 The project explores closed-loop vehicle control with steering, longitudinal wheel torque, and continuously variable front/rear wing angles of attack as control inputs. The principal implementation is a MATLAB script using **CasADi** and **IPOPT**. Its local vehicle model uses a 10-state Frenet-frame representation: progress along the track, lateral and heading errors, longitudinal/lateral velocity, yaw rate, and four wheel angular speeds.

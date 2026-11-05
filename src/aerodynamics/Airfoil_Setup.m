@@ -2,8 +2,8 @@
 clear; clc;
 
 % 1. Load Data (Skipping the 2 header lines)
-front_data = readmatrix('SeligS1223.txt', 'NumHeaderLines', 2);
-rear_data  = readmatrix('Eppler_E423.txt', 'NumHeaderLines', 2);
+front_data = readmatrix('SeligS1223.txt', 'NumHeaderLines', 0);
+rear_data  = readmatrix('Eppler_E423.txt', 'NumHeaderLines', 0);
 
 % 2. Isolate the operational window (0 to 15 degrees)
 f_idx = front_data(:,1) >= 0 & front_data(:,1) <= 15;
